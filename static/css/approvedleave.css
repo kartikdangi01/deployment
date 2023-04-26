@@ -115,6 +115,7 @@ small {
 
 p{
     color: var(--color-dark-variant);
+    display: none;
 }
 
 b{
@@ -297,6 +298,8 @@ aside .sidebar .message-count {
 /* Tabs */
 
 .tabs .title {
+    margin-right: 3%;
+    margin-left: 3%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -636,6 +639,11 @@ aside .sidebar .message-count {
     .tabcontent table{
         width: 95%;
     };
+
+    .tabs .title{
+        margin-left: 3%;
+        margin-right: 3%;
+    }
     .tabs .title h2
     {
         font-size: 1rem;
