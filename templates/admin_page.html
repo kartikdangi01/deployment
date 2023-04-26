@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- css -->
-    <link rel="stylesheet" href="{% static '/css/admin.css' %}">
+    <link rel="stylesheet" href=".{% static '/css/admin.css' %}">
     <title>Dashboard</title>
 </head>
 {% if messages %}
@@ -193,7 +193,7 @@
         
                     <div class="end">
                         <div class="submit">
-                            <button type="submit" class="submit-btn">Submit</button>
+                            <button type="submit" class="submit-btn" id="myButton" disabled>Submit</button>
                         </div>
                         
                         <div class="cancel">
@@ -275,7 +275,7 @@
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="../static/js/admin.js"></script>
     <script>
         var user = JSON.parse('{{ nol_json|safe }}');
         console.log(user)
@@ -294,8 +294,10 @@
             
             if (password != confirm_password) {
                 error_message.innerHTML = "Passwords do not match";
+                document.getElementById("myButton").disabled = true;
             } else {
                 error_message.innerHTML = "";
+                document.getElementById("myButton").disabled = false;
             }
         } 
      </script>
