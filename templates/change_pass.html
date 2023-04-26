@@ -51,7 +51,7 @@
                     </div>
                     
                     <div class="cancel">
-                        <button class="cancel-btn" onclick="goto()">Cancel</button>
+                        <button><a href="/" class="submit-btn" style="text-decoration:none; color:rgb(255, 255, 255);">Cancel</a></button>
                     </div>
                 </div>
             </div> 
@@ -62,9 +62,6 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script>
-        function goto(){
-            window.location.href = "/profile_page";
-        }
         function checkPasswords() {
             var password = document.getElementById("enter-pass").value;
             var confirm_password = document.getElementById("confirm-pass").value;

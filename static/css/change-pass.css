@@ -196,4 +196,30 @@ body{
 	color: #856404;
   }
 
+  .middle .end .cancel button {
+    text-decoration: none;
+    /* color: var(--color-primary); */
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    width: 6rem;
+    height: 3rem;
+    border-radius: var(--border-radius-1);
+    border: none;
+    font-size: 1.5rem;
+    transition: all 400ms ease;
+  }
+  
+  .middle .end .cancel button:hover {
+    /* color: var(--color-primary); */
+    background-color: var(--color-white);
+    color: var(--color-danger);
+    width: 6rem;
+    height: 3rem;
+    border-radius: var(--border-radius-1);
+    border: none;
+    font-size: 1.5rem;
+    /* border-width: 3rem;
+      border-color: var(--color-primary); */
+    border: 2.5px solid var(--color-danger);
+  }
 
