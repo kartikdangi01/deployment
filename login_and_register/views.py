@@ -12,6 +12,9 @@ from datetime import datetime
 import json
 import pymongo
 from decouple import config
+from django.contrib.auth.hashers import make_password, check_password
+
+
 client = MongoClient(
     config('MONGO_URI'))
 db = client['Leave_Management_System']
@@ -204,7 +207,7 @@ def index(request):
             adminTable = db['adminTable']
             reply = adminTable.find_one({'email': username})
             if reply:
-                if reply['password'] == password:
+                if check_password(password, reply['password']):
 
                     request.session['username'] = username
                     messages.success(
@@ -237,7 +240,7 @@ def index(request):
             reply = studenttable.find_one({'email': username})
 
             if reply:
-                if reply['password'] == password:
+                if check_password(password, reply['password']):
                     request.session['username'] = username
                     messages.success(
                         request, "You have been logged in successfully as Student!")
@@ -272,7 +275,7 @@ def index(request):
             reply = facultytable.find_one({'email': username})
 
             if reply:
-                if reply['password'] == password:
+                if check_password(password, reply['password']):
                     request.session['username'] = username
                     messages.success(
                         request, "You have been logged in successfully as Faculty!")
@@ -308,7 +311,7 @@ def index(request):
             reply = tatble.find_one({'email': username})
 
             if reply:
-                if reply['password'] == password:
+                if check_password(password, reply['password']):
                     request.session['username'] = username
                     messages.success(
                         request, "You have been logged in successfully as TA!")
@@ -513,7 +516,7 @@ def admin_page(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         password = request.POST.get('enter-password')
-        check_password = request.POST.get('confirm-password')
+        # check_password = request.POST.get('confirm-password')
 
         # if password != check_password:
         #     messages.error(request, "Passwords do not match!")
@@ -529,9 +532,10 @@ def admin_page(request):
         tas_list = tas.split(',')
         faculties_list = faculties.split(',')
 
-        if password != check_password:
-            messages.error(request, "Passwords do not match!")
-            return redirect('admin_page')
+        password = make_password(password)
+        # if password != check_password:
+        #     messages.error(request, "Passwords do not match!")
+        #     return redirect('admin_page')
 
         if role == 'student':
             studenttable = db['student info']
@@ -1019,10 +1023,11 @@ def change_pass(request):
                 {'email': request.session.get('username')})
 
             if reply:
-                if old_password != reply['password']:
+                if check_password(old_password, reply['password']) == False:
                     messages.error(request, "Old Password is incorrect!")
                     return render(request, 'change_pass.html')
                 else:
+                    new_password = make_password(new_password)
                     facultytable.update_one({'email': reply['email']}, {
                     '$set': {'password': new_password}})
                     messages.success(request, "Password changed successfully!")
