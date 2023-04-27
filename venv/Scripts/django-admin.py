@@ -1,4 +1,4 @@
-#!C:\Users\KARTIK\Desktop\project\leave-management\venv\Scripts\python.exe
+#!C:\Users\KARTIK\Desktop\New folder\deployment\venv\Scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
